@@ -17,6 +17,7 @@ CountTable <- as.matrix(CountTable[!row.names(CountTable) %in% row.names(FLUCnam
 
 
 library(matrixStats)
+#Combining counts from all sublibraries for TPM calculation
 SumBarcodes <- sapply(1:(ncol(CountTable)/4), function(x) rowSums(CountTable[, ((x * 4) - 4 + 1):(x * 4)]))
 colnames(SumBarcodes) <- paste(rep(c("m1Y", "Unmod"),15), c(rep(1:6, each = 2), rep(1:6, each = 2), rep(1:3, each = 2)), 
                                c(rep(c("80S", "Input"),each = 12), rep("IVT", 6)), sep = "-")
@@ -39,35 +40,8 @@ write.csv(Stability, "analysis/Stability.csv", quote = F)
 meanRRS <- data.frame(RRS_m1Y = rowMeans(RRS[,seq(1,12,2)]), RRS_Unmod = rowMeans(RRS[,seq(2,12,2)]))
 meanStab <-data.frame(Stability_m1Y = rowMeans(Stability[,seq(1,12,2)]), Stability_Unmod = rowMeans(Stability[,seq(2,12,2)]))
 
-CorMatrix <- cor(RRS,method = "spearman")
-write.csv(CorMatrix, "analysis/RRS_spearman.csv")
-library(corrplot)
-library(RColorBrewer)
-pdf("analysis/RRS_correlation.pdf")
-corrplot(CorMatrix, type="upper", order="hclust",tl.cex=0.5,col.lim = c(0,1),
-         col=brewer.pal(n=10,name="RdYlBu"), is.corr = F, cl.lim = c(0,1))
-dev.off()
-
-CorMatrix <- cor(Stability, method = "spearman")
-write.csv(CorMatrix, "analysis/Stability_spearman.csv")
-pdf("analysis/Stability_correlation.pdf")
-corrplot(CorMatrix, type="upper", order="hclust",tl.cex=0.5,
-         col=brewer.pal(n=10, name="RdYlBu"), method = "number")
-dev.off()
-
-RRSprime <- log2(RPMTable[,1:12]/RPMTable[,13:24])
-write.csv(RRSprime, "analysis/RRSprime.csv")
-CorMatrix <- cor(RRSprime, method = "spearman")
-write.csv(CorMatrix, "analysis/RRSprime_spearman.csv")
-pdf("analysis/RRSprime_correlation.pdf")
-corrplot(CorMatrix, type="upper", order="hclust",tl.cex=0.5,
-         col=brewer.pal(n=11, name="RdYlBu"))
-dev.off()
-
-meanRRSprime <- data.frame(RRSprime_m1Y = rowMeans(RRSprime[,seq(1,12,2)]), RRSprime_Unmod = rowMeans(RRSprime[,seq(2,12,2)]))
-
 write.csv(meanRRS, "analysis/meanRRS.csv", quote = F)
 write.csv(meanStab, "analysis/meanStability.csv", quote = F)
-write.csv(meanRRSprime, "analysis/meanRRSprime.csv", quote = F)
+
 
 
