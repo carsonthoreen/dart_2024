@@ -18,7 +18,6 @@ res <- results(dds)
 
 
 library(dplyr)
-#res <- results(dds)
 DEseqRes <- data.frame(res)
 write.csv(DEseqRes, "analysis/DEseq2_mod_m1YvsUnmod_spikein.csv", quote=F)
 DEseqRes <- DEseqRes[complete.cases(DEseqRes),]
