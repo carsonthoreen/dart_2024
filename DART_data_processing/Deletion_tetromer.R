@@ -29,7 +29,7 @@ for(i in 1:NROW(Tetromer)){
   Tetromer$Count[i] <- NROW(DelTable)
   Tetromer$meanRRS_m1Y[i] <- mean(DelTable$delRRS_m1Y)
   Tetromer$meanRRS_Unmod[i] <- mean(DelTable$delRRS_Unmod)
-  if(NROW(DelTable) > 10) {
+  if(NROW(DelTable) > 30) {
     Tetromer$pval_m1Y[i] <- wilcox.test(DelTable$delRRS_m1Y)$p.value
     Tetromer$pval_Unmod[i] <- wilcox.test(DelTable$delRRS_Unmod)$p.value
   }
