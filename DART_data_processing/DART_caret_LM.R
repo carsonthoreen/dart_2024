@@ -7,15 +7,14 @@ dir.create(paste0(dir, "/LinerModel/"))
 #CountRRS <- read.csv("RFfiles/ML_unmod_table.csv/ML_unmod_table_v2.csv")
 colnames(CountRRS)[2] <- "RRS"
 CountRRS <- CountRRS[CountRRS$RRS != -Inf,]
-#CountRRS <- CountRRS[grep("GFP", CountRRS$ID),]
 
 ML.data = CountRRS[,-1]
 library(dplyr)
-ML.data <- select_if(ML.data, is.numeric)
+#Remove non-numeric variables
+filtered_ML <- select_if(ML.data, is.numeric)
 
 
 library(caret)
-filtered_ML <- ML.data
 set.seed(100)
 samp <- createDataPartition(filtered_ML$RRS, p=0.8, list = F)
 train_set <- filtered_ML[samp,]
