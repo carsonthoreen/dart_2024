@@ -1,2 +1,6 @@
 # dart_2024
-Scripts for processing and analysis of DART results.
+This repository contains scripts for processing and analysis of DART results. Please refer to our publication:
+
+
+For additional requisition, please contact Dr. Carson Thoreen canson.thoreen@yale.edu
+
