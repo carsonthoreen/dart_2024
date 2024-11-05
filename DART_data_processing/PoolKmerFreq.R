@@ -5,7 +5,7 @@ K <- args[1]
 
 #K=4
 
-SequenceFile <- readDNAStringSet("New_Var_reduce_3.fa")
+SequenceFile <- readDNAStringSet("Reference/New_Var_reduce_3.fa")
 Sequences <- data.frame(ID = names(SequenceFile), Sequence = paste(subseq(SequenceFile, start =20, end = 282)))
 Sequences$UTR <- sapply(base::strsplit(Sequences$Sequence, "ATG"), "[", 1)
 Sequences$UTR <- str_sub(Sequences$UTR, start = 4)
