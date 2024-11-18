@@ -67,6 +67,5 @@ write.csv(pval_list, "EndogvsEGFP_feature_sig.csv", quote = F, row.names = F)
 
 colnames(DEseqRes) <- str_replace_all(colnames(DEseqRes), pattern = "T_", replacement = "U_")
 DEseqRes$relativeExp <- factor(DEseqRes$relativeExp, levels = c("Higher", "No_sig", "Lower"))
-#DEseqRes$delta_CC <- (str_count(Endog_Sequence$CDS, pattern = "CC") - str_count(EGFP_Sequence$CDS, pattern = "CC"))
 
 write.csv(DEseqRes, "EndogvsEGFP_DEseq_table_unmod.csv", quote = F, row.names = F)
